@@ -1,0 +1,89 @@
+\documentclass[12pt]{exam}
+\usepackage[utf8]{inputenc}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage{upquote}
+\usepackage{url}
+\newcommand{\class}{miniHive}
+\newcommand{\term}{}
+\newcommand{\examnum}{Setting up your own VM}
+\usepackage{fancyvrb}
+\newcommand{\examdate}{}
+
+\pagestyle{head}
+\firstpageheader{}{}{}
+\runningheader{\class}{\examnum\ - Page \thepage\ of \numpages}{}
+\runningheadrule
+
+
+
+\begin{document}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+\textbf{\class} & \\
+\textbf{\term} &&\\
+\textbf{\examnum} &&\\
+\textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+
+\noprintanswers
+
+
+
+\begin{questions}
+
+\question Register with Cloudera and download  the Cloudera Quickstart VM at \url{https://www.cloudera.com/downloads/quickstart_vms/5-13.html}.
+The VM for VMWare worked best for me. 
+
+
+\question
+Spin up the VM. First of all, you may want to change the keyboard layout. Next, you may want to set up a shared folder with your host OS, so that you can easily share data.
+
+This is how I mounted my shared folder. You may have to adapt the paths.
+
+\begin{Verbatim}[fontsize=\footnotesize]
+mkdir shares
+sudo mount -t vmhgfs .host:/ ~/shares/    
+\end{Verbatim}
+
+\question
+Open a  terminal. You'll need a more modern Python version and some extra modules.
+This is what worked for me:
+
+\begin{Verbatim}[fontsize=\footnotesize]
+# Download Python 3.6
+wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tar.xz
+
+xz -d Python-3.6.5.tar.xz
+tar -xvf Python-3.6.5.tar
+
+cd Python-3.6.5
+./configure --prefix=/usr/local
+
+# Let's build (compile) the source, this can take a while
+make
+sudo make altinstall
+cd ..
+sudo rm -rf Python*
+
+# Install PIP    
+wget https://bootstrap.pypa.io/get-pip.py
+sudo /usr/local/bin/python3.6 get-pip.py
+rm get-pip.py 
+    
+# Install further modules that we will need
+sudo /usr/local/bin/python3.6 -m pip install luigi
+sudo /usr/local/bin/python3.6 -m pip install sqlparse
+sudo /usr/local/bin/python3.6 -m pip install radb 
+sudo /usr/local/bin/python3.6 -m pip install pytest
+sudo /usr/local/bin/python3.6 -m pip install pytest-repeat
+\end{Verbatim}
+
+
+\end{questions}
+
+\end{document}

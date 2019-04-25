@@ -1,0 +1,145 @@
+\documentclass[12pt]{exam}
+\usepackage[utf8]{inputenc}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage{upquote}
+\usepackage{url}
+\newcommand{\class}{miniHive}
+\newcommand{\term}{}
+\newcommand{\examnum}{Milestone 2}
+\usepackage{fancyvrb}
+\newcommand{\examdate}{}
+\usepackage{paralist}
+
+\pagestyle{head}
+\firstpageheader{}{}{}
+\runningheader{\class}{\examnum\ - Page \thepage\ of \numpages}{}
+\runningheadrule
+
+
+
+\begin{document}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+\textbf{\class} & \\
+\textbf{\term} &&\\
+\textbf{\examnum} &&\\
+\textbf{\examdate} &&\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+
+
+
+
+\section*{Selection Pushing in Relational Algebra}
+In relational algebra, the following equivalencies apply (among others):
+
+\begin{align}
+    \sigma_{p_1\land p_2 \land \dots\land p_n}(R) \label{split}
+    &=
+    \sigma_{p_1}(\sigma_{p_2}(\dots (\sigma_{p_n}(R))\dots))
+    \\
+        \sigma_p( \sigma_q(R)) &= \sigma_q( \sigma_p(R)) \label{push_over_sel}
+    \\
+    \sigma_p(R_1 \times R_2)
+    &=
+    \sigma_p(R_1) \times R_2 \label{push_over_cross}
+    \\
+    \sigma_{R_1.A_1 = R_2.A_2}(R_1 \times R_2)
+    &=
+    R_1 \bowtie_{R_1.A_1 = R_2.A_1} R_2 \label{create_join}
+\end{align}
+
+\noindent
+Some remarks:
+
+\begin{compactitem}
+    \item 
+
+Rule~(\ref{split}) states that a conjunction in a selection predicate may be broken into several nested selections.
+At the same time, nested selections may be merged into a single selection with a conjunctive predicate.
+
+\item
+Rule~(\ref{push_over_sel}) states that nested selections may swap places.
+
+\item
+Rule~(\ref{push_over_cross}) states that a selection can be pushed down over a cross product,
+if it only requires the attributes of one of the operands. In the rule as stated above,
+we assume that predicate~$p$ only requires attributes from~$R_1$.
+(We need to consult the data dictionary recording the name and attributes of each relation).
+
+\item
+Rule~(\ref{create_join}) describes how a selection and a cross product may be merged into a theta join,
+provided that the selection predicate is a join condition. This is the case if it compares attributes of~$R_1$ and~$R_2$.
+\end{compactitem}
+
+\section{Material in Moodle}
+
+\noindent
+\begin{compactitem}
+\item
+The file \verb!test_raopt.py! contains unit tests. Make sure your implementation passes these tests.
+\end{compactitem}
+
+\section{What to Submit}
+\begin{compactitem}
+
+\item 
+Implement rule-based selection pushing and perform it on your relational algebra queries. 
+Proceed in these phases:
+\begin{compactenum}
+    \item Complex selection predicates are broken up, according to rule~(\ref{split}).
+    \item All selections are pushed down as far as possible, according to rules~(\ref{push_over_sel}) and~(\ref{push_over_cross}).
+    \item Nested selections are merged again, according to rule~(\ref{split}).
+    \item Joins are introduced, where possible, according to~(\ref{create_join}).
+
+\end{compactenum}
+
+Note that there are more rules for the logical optimization of relational algebra, such as rules for join reordering or projection pushing. For {\em miniHive}\/, we will make do with this small set of optimization rules (for now). 
+
+\item 
+\noindent
+Write a Python module \verb!raopt! that takes a relational algebra query. You may assume the query is the result of the canonical translation of SQL into relational algebra, so it uses only the operators $\sigma$, $\pi$, $\rho$ and $\times$ ). 
+
+This is how it should work. The data dictionary~\verb!dd! contains the relational schema and can consulted during selection pushing.
+
+\end{compactitem}
+
+\begin{Verbatim}[frame=single,fontsize=\small]
+>>> import radb.parse
+>>> import raopt
+>>>
+>>> # The data dictionary describes the relational schema.
+>>> dd = {}
+>>> dd["Person"] = {"name": "string", "age": "integer", "gender": "string"}
+>>> dd["Eats"] = {"name": "string", "pizza": "string"}
+>>>
+>>> stmt = """\project_{Person.name, Eats.pizza}
+...            \select_{Person.name = Eats.name}(Person \cross Eats);"""
+>>> ra = radb.parse.one_statement_from_string(stmt)
+>>>
+>>> ra1 = raopt.rule_break_up_selections(ra)
+>>> ra2 = raopt.rule_push_down_selections(ra1, dd)
+>>> ra3 = raopt.rule_merge_selections(ra2)
+>>> ra4 = raopt.rule_introduce_joins(ra3)
+>>>
+>>> print(ra4)
+\project_{Person.name, Eats.pizza} (Person \join_{Person.name = Eats.name} Eats)
+\end{Verbatim}
+
+
+\bigskip
+\noindent
+\rule{\linewidth}{0.5mm}
+
+{\bf Remarks:}
+For Milestone 2, you are not asked to find any particular optimizations to make your implementation more efficient. All you are required to provide is a correct and clean implementation.
+
+\noindent
+\rule{\linewidth}{0.5mm}
+
+
+\end{document}
