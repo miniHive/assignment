@@ -6,7 +6,7 @@ import sqlparse
 import unittest
 
 '''
-Public unit tests for WMDK milestone 1.
+Public unit tests for miniHive milestone 1.
 
 These tests check the canonical translation of simple SQL statements
 into the relational algebra using the operators selection, projection,
