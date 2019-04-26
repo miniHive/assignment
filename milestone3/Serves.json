@@ -1,0 +1,18 @@
+Serves	{"Serves.pizzeria" : "Chicago Pizza", "Serves.pizza" : "cheese", "Serves.price" : 7.75}
+Serves	{"Serves.pizzeria" : "Chicago Pizza", "Serves.pizza" : "supreme", "Serves.price" : 8.5}
+Serves	{"Serves.pizzeria" : "Dominos", "Serves.pizza" : "cheese", "Serves.price" : 9.75}
+Serves	{"Serves.pizzeria" : "Dominos", "Serves.pizza" : "mushroom", "Serves.price" : 11}
+Serves	{"Serves.pizzeria" : "Little Ceasars", "Serves.pizza" : "cheese", "Serves.price" : 7}
+Serves	{"Serves.pizzeria" : "Little Ceasars", "Serves.pizza" : "mushroom", "Serves.price" : 9.25}
+Serves	{"Serves.pizzeria" : "Little Ceasars", "Serves.pizza" : "pepperoni", "Serves.price" : 9.75}
+Serves	{"Serves.pizzeria" : "Little Ceasars", "Serves.pizza" : "sausage", "Serves.price" : 9.5}
+Serves	{"Serves.pizzeria" : "New York Pizza", "Serves.pizza" : "cheese", "Serves.price" : 7}
+Serves	{"Serves.pizzeria" : "New York Pizza", "Serves.pizza" : "pepperoni", "Serves.price" : 8}
+Serves	{"Serves.pizzeria" : "New York Pizza", "Serves.pizza" : "supreme", "Serves.price" : 8.5}
+Serves	{"Serves.pizzeria" : "Pizza Hut", "Serves.pizza" : "cheese", "Serves.price" : 9}
+Serves	{"Serves.pizzeria" : "Pizza Hut", "Serves.pizza" : "pepperoni", "Serves.price" : 12}
+Serves	{"Serves.pizzeria" : "Pizza Hut", "Serves.pizza" : "sausage", "Serves.price" : 12}
+Serves	{"Serves.pizzeria" : "Pizza Hut", "Serves.pizza" : "supreme", "Serves.price" : 12}
+Serves	{"Serves.pizzeria" : "Straw Hat", "Serves.pizza" : "cheese", "Serves.price" : 9.25}
+Serves	{"Serves.pizzeria" : "Straw Hat", "Serves.pizza" : "pepperoni", "Serves.price" : 8}
+Serves	{"Serves.pizzeria" : "Straw Hat", "Serves.pizza" : "sausage", "Serves.price" : 9.17}
