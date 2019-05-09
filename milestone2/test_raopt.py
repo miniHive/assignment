@@ -8,12 +8,13 @@ Public unit tests for miniHive milestone 2.
 Tests check several rewriting rules for the logical optimization
 of relational algebra expressions.
 
-Tests assume that all relational algebra queries have been
-compiled from SQL queries by the canonical translation.
-Therefore, they use projection, selection, the cross product
+Tests assume that all relational algebra queries 
+use projection, selection, the cross product
 and the renaming operator only.
 
 Last modified 09-APR-2018.
+
+09-MAY-2019 Updated comment.
 '''
 
 '''
