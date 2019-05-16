@@ -73,7 +73,7 @@ python-executable=/usr/local/bin/python3.6
 \begin{itemize}
     \item 
 
-We assume that the queries are the output of milestone~2 and therefore use the operators $\sigma$, $\pi$, $\rho$, and $\bowtie$ only. (We do not implement the cross product as a MapReduce job, it doesn't make much sense for {\em big}\/ data.)
+We assume that the queries are the output of milestone~2 and therefore use the operators $\sigma$, $\pi$, $\rho$, and $\bowtie_p$ (Equi-join) only. (We do not implement the cross product as a MapReduce job, it doesn't make much sense for {\em big}\/ data.)
 
 \item
 We assume that our input consists of ``flat'' JSON documents (no arrays or  nested objects). Here is the data for  relation \verb!Person! from the {\em pizza}\/ example. Each line is a key-value pair, separated by a tab. The key is the relation name, the value is a flat JSON document.
