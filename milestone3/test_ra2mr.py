@@ -15,6 +15,7 @@ python3 -m pytest test_ra2mr.py -p no:warnings --show-capture=no
 
 Change history:
 30-MAY-2018 Two tests had the same name, will be ignored in correctness checking.
+03-MAY-2019 Renamed tests with duplicate name.
 '''
 
 def prepareMockFileSystem():    
@@ -198,7 +199,7 @@ class TestMREvaluation(object):
 
     # This test will be ignored in the final submission,
     # because the initial release of this file had two tests with the same name.
-    def test_person_join_eats_mushroom_IGNORE(self):
+    def test_person_join_eats_mushroom(self):
         querystring = "Person \join_{Person.name = Eats.name} (\select_{pizza='mushroom'} Eats);"
         computed = self._evaluate(querystring)
         assert len(computed)== 4
@@ -219,7 +220,7 @@ class TestMREvaluation(object):
 
     # This test will be ignored in the final submission,
     # because the initial release of this file had two tests with the same name.
-    def test_female_person_join_eats_IGNORE(self):
+    def test_female_person_join_eats(self):
         querystring = "(\select_{gender='female'} Person) \join_{Person.name = Eats.name} Eats;"
         computed = self._evaluate(querystring)
         assert len(computed) == 5
