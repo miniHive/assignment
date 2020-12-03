@@ -112,7 +112,7 @@ This is how it should work. The data dictionary~\verb!dd! contains the relationa
 >>> dd["Person"] = {"name": "string", "age": "integer", "gender": "string"}
 >>> dd["Eats"] = {"name": "string", "pizza": "string"}
 >>>
->>> stmt = """"\project_{Person.name, Eats.pizza}
+>>> stmt = """\project_{Person.name, Eats.pizza}
 ...            \select_{Person.name = Eats.name}(Person \cross Eats);"""
 >>> ra = radb.parse.one_statement_from_string(stmt)
 >>>

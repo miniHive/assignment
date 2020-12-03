@@ -89,13 +89,13 @@ This is how it should work when you spin up the interactive Python interpreter:
 >>>import radb
 >>>import sql2ra
 >>>
->>> sql = "select name from person where gender='female'"
+>>> sql = "select distinct name from person where gender='female'"
 >>> stmt = sqlparse.parse(sql)[0]
 >>>
 >>> ra = sql2ra.translate(stmt)
 >>>
->>> type(ra) # Important! Do not return a raw String, but a Select object.
-<class 'radb.ast.Select'>
+>>> type(ra) # Important! Do not return a raw String, but a Project object.
+<class 'radb.ast.Project'>
 >>>
 >>> print(ra)
 \project_{name} (\select_{gender = 'female'} person)
