@@ -8,4 +8,4 @@ The course was taught in English, using a flipped classroom model. The course ma
 
 This repository contains a report on this course, as well as the material made available to the students for implementing *miniHive* milestones. 
 
-For questions on *miniHive*, contact stefanie.scherzinger@oth-regensburg.de.
+For questions on *miniHive*, contact stefanie.scherzinger@uni-passau.de.de.
